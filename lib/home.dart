@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/MyAllStayil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,45 +9,57 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int CounterNumber = 0;
+
+ double result = 0;
+
+  TextEditingController Sum1Controler = TextEditingController();
+   TextEditingController Sum2Controler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          "Counter App",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        title: Text(
+          "Sum App",
+          style: MyTextStyle(),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 35.0),
+        padding: const EdgeInsets.all(40.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Center(
-                child: Text(
-              CounterNumber.toString(),
-              style: const TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
-            )),
-            ElevatedButton(
+            Text(
+              "Result = $result",
+              style: MyTextStyle(),
+            ),
+            const SizedBox(height: 25),
+            TextFormField(
+              controller: Sum1Controler,
+              decoration: MyDecoration("Sum1"),
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              controller: Sum2Controler,
+              decoration: MyDecoration('Sum2'),
+            ),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: double.infinity,
+              height: 45,
+              child: ElevatedButton(
                 onPressed: () {
+                  double a = double.parse(Sum1Controler.text.trim());
+                  double b = double.parse(Sum1Controler.text.trim());
                   setState(() {
-                    CounterNumber = CounterNumber - 1;
+                    result = a + b;
                   });
                 },
-                child: Icon(CupertinoIcons.minus))
+                style: MyBattonStyle(),
+                child: const Text("Add"),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            CounterNumber = CounterNumber + 1;
-          });
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }
